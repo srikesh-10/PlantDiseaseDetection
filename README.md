@@ -102,6 +102,19 @@ PlantDiseaseDetection/
 The current entry points raise `NotImplementedError` by design until their
 respective workflows are implemented.
 
+## Dataset Preparation
+
+Place the PlantVillage class directories under `dataset/raw/PlantVillage/`,
+then generate deterministic 70/15/15 train, validation, and test splits:
+
+```bash
+python src/data_preprocessing.py
+```
+
+The pipeline validates and resizes readable images to 224 x 224 RGB, ignores
+corrupted images safely, writes progress to `logs/dataset_preprocessing.log`,
+and saves class and split statistics to `docs/dataset_report.json`.
+
 ## Architecture
 
 The scaffold separates user-interface, data, modeling, prediction, persistence,
