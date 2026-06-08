@@ -1,0 +1,87 @@
+{
+  "Tomato_Healthy": {
+    "symptoms": [
+      "Leaves have an even green color and normal shape.",
+      "No visible lesions, yellowing, or fungal growth."
+    ],
+    "treatment": [
+      "No disease treatment is required.",
+      "Continue routine crop monitoring and balanced nutrition."
+    ],
+    "prevention": [
+      "Use clean tools and disease-free planting material.",
+      "Maintain appropriate watering, spacing, and soil fertility."
+    ]
+  },
+  "Tomato_Early_Blight": {
+    "symptoms": [
+      "Older leaves develop brown spots with concentric rings.",
+      "Affected leaves may yellow and drop prematurely."
+    ],
+    "treatment": [
+      "Remove and dispose of heavily infected leaves.",
+      "Apply a locally approved fungicide according to its label."
+    ],
+    "prevention": [
+      "Rotate crops and remove infected plant debris.",
+      "Water at soil level and improve airflow between plants."
+    ]
+  },
+  "Tomato_Late_Blight": {
+    "symptoms": [
+      "Leaves develop rapidly expanding, water-soaked dark lesions.",
+      "White fungal growth may appear on leaf undersides in humid weather."
+    ],
+    "treatment": [
+      "Remove infected plants promptly to reduce spread.",
+      "Consult local guidance for an approved late-blight fungicide program."
+    ],
+    "prevention": [
+      "Use resistant varieties and certified disease-free plants.",
+      "Avoid overhead irrigation and monitor during cool, wet conditions."
+    ]
+  },
+  "Potato_Healthy": {
+    "symptoms": [
+      "Leaves are evenly green with normal growth and texture.",
+      "No visible spots, lesions, wilting, or abnormal discoloration."
+    ],
+    "treatment": [
+      "No disease treatment is required.",
+      "Continue routine crop monitoring and balanced nutrition."
+    ],
+    "prevention": [
+      "Plant certified disease-free seed potatoes.",
+      "Maintain good field sanitation, drainage, and crop rotation."
+    ]
+  },
+  "Potato_Early_Blight": {
+    "symptoms": [
+      "Older leaves show dark brown lesions with concentric rings.",
+      "Leaf tissue around lesions may become yellow."
+    ],
+    "treatment": [
+      "Remove severely affected foliage where practical.",
+      "Apply a locally approved fungicide according to its label."
+    ],
+    "prevention": [
+      "Rotate away from solanaceous crops and remove crop debris.",
+      "Reduce plant stress through appropriate irrigation and nutrition."
+    ]
+  },
+  "Potato_Late_Blight": {
+    "symptoms": [
+      "Leaves develop irregular, water-soaked lesions that turn brown or black.",
+      "White fungal growth may occur around lesion margins in humid conditions."
+    ],
+    "treatment": [
+      "Destroy infected foliage and volunteer plants promptly.",
+      "Follow local agricultural guidance for approved fungicide use."
+    ],
+    "prevention": [
+      "Use certified seed and resistant varieties when available.",
+      "Avoid prolonged leaf wetness and monitor forecasts for blight risk."
+    ]
+  }
+}
+

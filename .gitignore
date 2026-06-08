@@ -1,0 +1,68 @@
+# Python environments
+.venv/
+venv/
+env/
+
+# Python cache and tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Dataset artifacts (retain nested directory placeholders)
+dataset/*
+!dataset/raw/
+!dataset/processed/
+!dataset/train/
+!dataset/val/
+!dataset/test/
+dataset/raw/*
+dataset/processed/*
+dataset/train/*
+dataset/val/*
+dataset/test/*
+!dataset/raw/.gitkeep
+!dataset/processed/.gitkeep
+!dataset/train/.gitkeep
+!dataset/val/.gitkeep
+!dataset/test/.gitkeep
+
+# Trained model artifacts (retain the saved-model directory placeholder)
+models/*
+!models/saved_models/
+models/saved_models/*
+!models/saved_models/.gitkeep
+
+# Training, evaluation, and application logs (retain the placeholder)
+logs/*
+!logs/.gitkeep
+
+# Runtime database files (retain the directory placeholder)
+database/*.db
+database/*.sqlite
+database/*.sqlite3
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE and OS files
+.idea/
+.vscode/
+*.code-workspace
+.DS_Store
+Thumbs.db
+
+# Local configuration and logs
+.env
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+~*
