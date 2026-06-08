@@ -59,6 +59,8 @@ Thumbs.db
 .env
 *.log
 
+docs/dataset_report.json
+
 # Temporary files
 *.tmp
 *.temp
