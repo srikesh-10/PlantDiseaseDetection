@@ -5,18 +5,18 @@ web-based plant disease detection system. The planned application will use
 MobileNetV2 transfer learning to classify tomato and potato leaf images, then
 present confidence scores, disease guidance, and prediction history.
 
-> **Status:** Architecture and placeholders only. Model training, dataset
-> processing, prediction logic, database behavior, and the Streamlit UI are not
-> implemented yet.
+> **Status:** Dataset preprocessing and the MobileNetV2 training pipeline are
+> implemented. Prediction logic, database behavior, and the Streamlit UI remain
+> future phases.
 
 ## Supported Classes
 
-- `Tomato_Healthy`
-- `Tomato_Early_Blight`
-- `Tomato_Late_Blight`
-- `Potato_Healthy`
-- `Potato_Early_Blight`
-- `Potato_Late_Blight`
+- `Potato___Early_blight`
+- `Potato___Late_blight`
+- `Potato___healthy`
+- `Tomato___Early_blight`
+- `Tomato___Late_blight`
+- `Tomato___healthy`
 
 ## Planned Features
 
@@ -99,9 +99,6 @@ PlantDiseaseDetection/
    will populate `processed/`, `train/`, `val/`, and `test/`. Dataset contents
    are intentionally excluded from Git.
 
-The current entry points raise `NotImplementedError` by design until their
-respective workflows are implemented.
-
 ## Dataset Preparation
 
 Place the PlantVillage class directories under `dataset/raw/PlantVillage/`,
@@ -115,6 +112,25 @@ The pipeline validates and resizes readable images to 224 x 224 RGB, ignores
 corrupted images safely, writes progress to `logs/dataset_preprocessing.log`,
 and saves class and split statistics to `docs/dataset_report.json`.
 
+## Model Training
+
+Train the six-class MobileNetV2 transfer-learning model from the prepared
+splits:
+
+```bash
+python train.py
+```
+
+The training pipeline discovers labels from `dataset/train`, calculates
+balanced class weights, applies image augmentation, and trains a frozen
+ImageNet MobileNetV2 base with a custom classification head. Early stopping,
+best-model checkpointing, and learning-rate reduction are enabled.
+
+Models and labels are written to `models/saved_models/`. Evaluation metrics,
+the classification report, confusion matrix, and training curves are written
+to `docs/`. Progress and evaluation results are written to
+`logs/training.log`.
+
 ## Architecture
 
 The scaffold separates user-interface, data, modeling, prediction, persistence,
@@ -123,15 +139,14 @@ reusable application logic belongs in `src/`; top-level scripts remain thin
 entry points. This layout supports future CLI, web, testing, and deployment
 workflows without coupling them to one another.
 
-Future TensorFlow models will use the native Keras v3 format and be stored under
+TensorFlow models use the native Keras v3 format and are stored under
 `models/saved_models/`, for example as `best_model.keras` and
 `final_model.keras`. Training logs, evaluation reports, and application logs
 belong under `logs/`.
 
 ## Future Enhancements
 
-- Implement validated image preprocessing and augmentation pipelines
-- Build and fine-tune the MobileNetV2 classifier
+- Fine-tune selected MobileNetV2 layers after initial transfer learning
 - Add evaluation metrics, experiment tracking, and model versioning
 - Implement prediction services and calibrated confidence scores
 - Build the Streamlit upload, results, and history views
