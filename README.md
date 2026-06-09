@@ -131,6 +131,20 @@ the classification report, confusion matrix, and training curves are written
 to `docs/`. Progress and evaluation results are written to
 `logs/training.log`.
 
+## Single-Image Prediction
+
+Predict a disease class from one leaf image using the best trained model:
+
+```bash
+python predict.py path/to/leaf-image.jpg
+```
+
+The prediction engine loads `models/saved_models/best_model.keras` and
+`models/saved_models/labels.json`, validates and resizes the image, prints the
+predicted disease and confidence percentage, and saves prediction history to
+`database/prediction_history.sqlite3`. Prediction activity is logged to
+`logs/prediction.log`.
+
 ## Architecture
 
 The scaffold separates user-interface, data, modeling, prediction, persistence,
@@ -148,7 +162,7 @@ belong under `logs/`.
 
 - Fine-tune selected MobileNetV2 layers after initial transfer learning
 - Add evaluation metrics, experiment tracking, and model versioning
-- Implement prediction services and calibrated confidence scores
+- Add confidence calibration and prediction uncertainty thresholds
 - Build the Streamlit upload, results, and history views
 - Add SQLite migrations and prediction-history queries
 - Expand automated tests and continuous integration

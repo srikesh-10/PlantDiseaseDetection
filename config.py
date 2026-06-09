@@ -28,6 +28,7 @@ FINAL_MODEL_PATH = SAVED_MODELS_DIR / "final_model.keras"
 LABELS_PATH = SAVED_MODELS_DIR / "labels.json"
 MODEL_PATH = FINAL_MODEL_PATH
 TRAINING_LOG_PATH = LOGS_DIR / "training.log"
+PREDICTION_LOG_PATH = LOGS_DIR / "prediction.log"
 TRAINING_METRICS_PATH = DOCS_DIR / "training_metrics.json"
 CLASSIFICATION_REPORT_PATH = DOCS_DIR / "classification_report.txt"
 CONFUSION_MATRIX_PATH = DOCS_DIR / "confusion_matrix.png"
