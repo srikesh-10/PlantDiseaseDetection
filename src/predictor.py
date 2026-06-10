@@ -14,11 +14,13 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 from config import (
     BEST_MODEL_PATH,
     DATABASE_PATH,
+    DISEASE_INFO_PATH,
     IMAGE_SIZE,
     LABELS_PATH,
     PREDICTION_LOG_PATH,
 )
 from database import initialize_database, save_prediction
+from src.disease_info import DiseaseInfoManager
 
 LOGGER = logging.getLogger("prediction")
 
@@ -100,6 +102,7 @@ class PlantDiseasePredictor:
         model_path: Path = BEST_MODEL_PATH,
         labels_path: Path = LABELS_PATH,
         database_path: Path = DATABASE_PATH,
+        disease_info_path: Path = DISEASE_INFO_PATH,
         model_contains_preprocessing: bool = True,
     ) -> None:
         """Initialize prediction assets and history storage.
@@ -124,6 +127,18 @@ class PlantDiseasePredictor:
                 f"{len(self.labels)} entries."
             )
         initialize_database(database_path)
+
+        # Load the disease knowledge base (graceful degradation on failure).
+        self.disease_info_manager: DiseaseInfoManager | None = None
+        try:
+            self.disease_info_manager = DiseaseInfoManager(disease_info_path)
+        except (FileNotFoundError, ValueError) as exc:
+            LOGGER.warning(
+                "Disease knowledge base unavailable — predictions will "
+                "not include disease details: %s",
+                exc,
+            )
+
         LOGGER.info("Prediction engine initialized with %d classes", len(self.labels))
 
     def predict(self, image_path: str | Path) -> dict[str, Any]:
@@ -144,14 +159,28 @@ class PlantDiseasePredictor:
 
             percentages = probabilities[0] * 100.0
             predicted_index = int(np.argmax(percentages))
+            predicted_class = self.labels[predicted_index]
             result: dict[str, Any] = {
-                "predicted_class": self.labels[predicted_index],
+                "predicted_class": predicted_class,
                 "confidence": round(float(percentages[predicted_index]), 2),
                 "all_probabilities": {
                     label: round(float(percentages[index]), 2)
                     for index, label in enumerate(self.labels)
                 },
             }
+
+            # Attach disease knowledge-base information.
+            if self.disease_info_manager is not None:
+                disease_details = self.disease_info_manager.get_disease_info(
+                    predicted_class,
+                )
+                result["symptoms"] = disease_details["symptoms"]
+                result["treatment"] = disease_details["treatment"]
+                result["prevention"] = disease_details["prevention"]
+            else:
+                result["symptoms"] = ["Knowledge base not available."]
+                result["treatment"] = ["Knowledge base not available."]
+                result["prevention"] = ["Knowledge base not available."]
             prediction_id = save_prediction(
                 {
                     "image_path": str(path),
