@@ -276,7 +276,7 @@ The system evaluated model training convergence and class confusion to ensure mi
 ## 17. Author
 * **Developer**: [Srikesh](https://github.com/srikesh-10)
 * **GitHub Portfolio**: [@srikesh-10](https://github.com/srikesh-10)
-* **Contact / Profile**: Computer Science / Machine Learning Portfolio
+* **Contact / Profile**: www.linkedin.com/in/srikesh-praveen-909a08326
 
 ---
 
